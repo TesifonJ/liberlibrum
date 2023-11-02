@@ -31,5 +31,33 @@ public class BookEntity {
     @Size(min = 1, max = 100)
     private String category;
 
+    public Long getIdBook() {
+        return idBook;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     
 }
