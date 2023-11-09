@@ -83,11 +83,6 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<LoanEntity> loans;
 
-    public UserEntity(){
-        // booksArray
-        // loansArray
-    }
-
     /**
      * Constructor for a User
      * @param name the name of the user 
@@ -106,16 +101,11 @@ public class UserEntity {
         this.role = role;
     }
 
-    public Long getId() {
-        return id;
+    public UserEntity(String name2, String surname2, String lastname, String email2, String username2, String string, boolean b) {
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    
+    public UserEntity(long l, String string, String string2, String string3, String string4, String string5,
+            String liberlibrumPASSWORD, boolean b) {
     }
 
     public String getSurname() {
