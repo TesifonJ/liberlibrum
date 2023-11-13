@@ -43,7 +43,7 @@ public class UserService {
     public Long create(UserEntity oUserEntity) {
         oSessionService.onlyAdmins();
         oUserEntity.setId(null);
-        oUserEntity.setPassword(foxforumPASSWORD);
+        oUserEntity.setPassword(oUserEntity.getPassword());
         return oUserRepository.save(oUserEntity).getId();
     }
 
@@ -85,7 +85,7 @@ public class UserService {
             String username = DataGenerationHelper
                     .doNormalizeString(
                             name.substring(0, 3) + surname.substring(1, 3) + lastname.substring(1, 2) + i);
-            oUserRepository.save(new UserEntity(name, surname, lastname, email, username,
+            oUserRepository.save(new UserEntity(name, surname, email, username,
                     "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e", true));
         }
         return oUserRepository.count();
