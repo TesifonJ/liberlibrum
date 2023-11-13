@@ -77,12 +77,10 @@ public class UserService {
         for (int i = 0; i < amount; i++) {
             String name = DataGenerationHelper.getRadomName();
             String surname = DataGenerationHelper.getRadomSurname();
-            String email = name.substring(0, 3) + surname.substring(0, 3) + "@ausiasmarch.net";
-            String username = DataGenerationHelper
-                    .doNormalizeString(
-                            name.substring(0, 3) + surname.substring(1, 3));
-            oUserRepository.save(new UserEntity(name, surname, email, username,
-                    LIBERLIBRUM_DEFAULT_PASSWORD, true));
+            String email = name.substring(0, 3) + surname.substring(0, 3) + i + "@ausiasmarch.net";
+            String username =DataGenerationHelper.doNormalizeString(name.substring(0, 3) + surname.substring(1, 3) + i);
+            
+            oUserRepository.save(new UserEntity(name, surname,username, email, LIBERLIBRUM_DEFAULT_PASSWORD, true));
         }
         return oUserRepository.count();
     }
