@@ -1,0 +1,153 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "fox-forum-user",
+    "dateExported": "2023-11-13T21:24:28.086Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "05ada4d8-29f0-42cf-97d0-2a4909077f07",
+            "colId": "a4d3dc88-cbb8-4d70-9fe4-9bedc975f0d5",
+            "containerId": "",
+            "name": "GetUser",
+            "url": "http://localhost:8083/user/12",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-10-14T15:20:18.402Z",
+            "modified": "2023-11-13T16:39:17.736Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "faa0ab0e-b228-44ae-b2c1-ff68c049f97b",
+            "colId": "a4d3dc88-cbb8-4d70-9fe4-9bedc975f0d5",
+            "containerId": "",
+            "name": "GetAllUsers",
+            "url": "http://localhost:8083/user?page=1&size=10",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2023-10-14T15:20:18.406Z",
+            "modified": "2023-11-13T18:24:46.320Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "size",
+                    "value": "10",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkNzZlYjk4Ni1kYzA2LTQxZDAtOGRmNS03NTljMjYxNWMzODciLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE2OTk4OTk3OTMsImV4cCI6MTY5OTkwMTI5MywibmFtZSI6InVjYXJ0ZXIifQ.umsU7L0W5ZjTjP3m12HowEefcDtI_sl2ZkywuWYjceXp3Xd3qJBCQLTbjaJkH-bE1RJ2CJOWWs4CRYMXnZT8jA"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ba098be6-7bbb-4451-8c3e-9ce2370fb0d7",
+            "colId": "a4d3dc88-cbb8-4d70-9fe4-9bedc975f0d5",
+            "containerId": "",
+            "name": "InsertUser",
+            "url": "http://localhost:8083/user",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-10-14T15:20:18.403Z",
+            "modified": "2023-11-13T16:58:16.720Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\":12,\n  \"name\": \"architecto\",\n  \"email\": \"erika20@example.net\",\n  \"username\": \"alicia\",\n  \"password\": \"03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4\",\n  \"role\": true\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI5N2I5YTgzMi1iODJiLTQ1OTktYTE3NC1kOTRmN2U2ZmU1NWMiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE2OTk4OTQ2ODcsImV4cCI6MTY5OTg5NjE4NywibmFtZSI6InVjYXJ0ZXIifQ.iZCSixUpkyLHNNK4vyOMLw2yzqzfPkKAg45G-OmIvxC0cPn3h6ckk8Tgcs6zZUxAxoPyJh4brExjMJScmEHjGw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "53aabc1e-8861-4df6-ac7b-02bc710d0c12",
+            "colId": "a4d3dc88-cbb8-4d70-9fe4-9bedc975f0d5",
+            "containerId": "",
+            "name": "PopulateUsers",
+            "url": "http://localhost:8083/user/populate/5",
+            "method": "POST",
+            "sortNum": 25000,
+            "created": "2023-10-14T15:20:18.405Z",
+            "modified": "2023-11-13T18:52:41.341Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI0MWNhZjJhZi0zOGQ1LTRmMjItYjdhYS0xYmVjZTgxOTkzZTEiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE2OTk5MDE1NTMsImV4cCI6MTY5OTkwMzA1MywibmFtZSI6InVjYXJ0ZXIifQ.CT86YHy0FgIIGikLNEUf1_yKR9IHZep68T0FeoSGKqDe4DrJI6HRdUK5dm_gJkv0wNMG4Tj_cXmWwnk38uI87w"
+            },
+            "tests": []
+        },
+        {
+            "_id": "b75dda36-e7f0-4f6e-9238-e8ed97bd9383",
+            "colId": "a4d3dc88-cbb8-4d70-9fe4-9bedc975f0d5",
+            "containerId": "",
+            "name": "UpdateUser",
+            "url": "http://localhost:8083/user",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2023-10-14T15:20:18.404Z",
+            "modified": "2023-11-13T18:16:12.918Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 46,\n  \"name\": \"flash\",\n  \"surname\": \"batman\",\n  \"email\": \"erikaaa20@example.net\",\n  \"username\": \"cardoba\",\n  \"role\": true\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI2OTkzYjU5Ny0wOWI5LTQ2NzktODliNC02ZjkwZTZkYjE2NDAiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE2OTk4OTkzNDYsImV4cCI6MTY5OTkwMDg0NiwibmFtZSI6InVjYXJ0ZXIifQ.0vVKHYdLsQytuw-s50xOjZojcw1ShK4346jUxyOOhlVLzlMNG2txkan-6SvF9EYZJaFy3cn9gNomhL9wP-PjTg"
+            },
+            "tests": []
+        },
+        {
+            "_id": "c8c745f0-94da-4e90-8c2c-e8fea0948ad3",
+            "colId": "a4d3dc88-cbb8-4d70-9fe4-9bedc975f0d5",
+            "containerId": "",
+            "name": "DeleteUser",
+            "url": "http://localhost:8083/user/2",
+            "method": "DELETE",
+            "sortNum": 37500,
+            "created": "2023-10-14T15:20:18.416Z",
+            "modified": "2023-11-13T17:08:37.964Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI5N2I5YTgzMi1iODJiLTQ1OTktYTE3NC1kOTRmN2U2ZmU1NWMiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE2OTk4OTQ2ODcsImV4cCI6MTY5OTg5NjE4NywibmFtZSI6InVjYXJ0ZXIifQ.iZCSixUpkyLHNNK4vyOMLw2yzqzfPkKAg45G-OmIvxC0cPn3h6ckk8Tgcs6zZUxAxoPyJh4brExjMJScmEHjGw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "077d625e-3259-4865-816c-98a18a4fd231",
+            "colId": "a4d3dc88-cbb8-4d70-9fe4-9bedc975f0d5",
+            "containerId": "",
+            "name": "login",
+            "url": "http://localhost:8083/session",
+            "method": "POST",
+            "sortNum": 47500,
+            "created": "2023-11-13T16:48:23.051Z",
+            "modified": "2023-11-13T16:49:18.115Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"ucarter\",\n  \"password\": \"badc79c80abbc8d7e4d4208cc8d79210e68e66236776ea3691db3afe69562eb4\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}

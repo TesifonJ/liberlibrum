@@ -15,10 +15,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findByUsernameAndPassword(String username, String password);
 
-    @Query(value = "SELECT u.*,count(r.id) FROM user u, loan l WHERE u.id = l.id_user GROUP BY u.id ORDER BY COUNT(u.id) desc", nativeQuery = true)
+    @Query(value = "SELECT u.*,count(l.id) FROM users u, loans l WHERE u.id = l.id_user GROUP BY u.id ORDER BY COUNT(u.id) desc", nativeQuery = true)
     Page<UserEntity> findUsersByLoansNumberDescFilter(Pageable pageable);
 
     @Modifying
-    @Query(value = "ALTER TABLE user AUTO_INCREMENT = 1", nativeQuery = true)
+    @Query(value = "ALTER TABLE users AUTO_INCREMENT = 1", nativeQuery = true)
     void resetAutoIncrement();
 }

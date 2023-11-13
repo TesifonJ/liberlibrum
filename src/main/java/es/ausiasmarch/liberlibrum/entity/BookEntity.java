@@ -1,63 +1,105 @@
-// package es.ausiasmarch.liberlibrum.entity;
+package es.ausiasmarch.liberlibrum.entity;
 
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.GeneratedValue;
-// import jakarta.persistence.GenerationType;
-// import jakarta.persistence.Id;
-// import jakarta.persistence.Table;
-// import jakarta.validation.constraints.NotBlank;
-// import jakarta.validation.constraints.NotNull;
-// import jakarta.validation.constraints.Size;
+import java.util.List;
 
-// @Entity
-// @Table(name = "books")
-// public class BookEntity {
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//     private Long idBook;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-//     @NotBlank
-//     @NotNull
-//     @Size(min = 1, max = 100)
-//     private String title;
+@Entity
+@Table(name = "books")
+public class BookEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-//     @NotBlank
-//     @NotNull
-//     @Size(min = 1, max = 100)
-//     private String author;
+    @NotBlank
+    @NotNull
+    @Size(min = 1, max = 100)
+    private String title;
 
-//     @NotBlank
-//     @NotNull
-//     @Size(min = 1, max = 100)
-//     private String category;
+    @NotBlank
+    @NotNull
+    @Size(min = 1, max = 100)
+    private String author;
 
-//     public Long getIdBook() {
-//         return idBook;
-//     }
+    @NotBlank
+    @NotNull
+    @Size(min = 1, max = 100)
+    private String category;
 
-//     public String getTitle() {
-//         return title;
-//     }
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private UserEntity user;
 
-//     public void setTitle(String title) {
-//         this.title = title;
-//     }
+    // @OneToMany(mappedBy = "book", fetch = jakarta.persistence.FetchType.LAZY)
+    // private List<LoanEntity> books;
 
-//     public String getAuthor() {
-//         return author;
-//     }
+    public BookEntity() {
 
-//     public void setAuthor(String author) {
-//         this.author = author;
-//     }
+    }
 
-//     public String getCategory() {
-//         return category;
-//     }
+    public BookEntity(Long id, String title, String author, String category, UserEntity user) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.user = user;
+    }
 
-//     public void setCategory(String category) {
-//         this.category = category;
-//     }
+     public BookEntity(String title, String author, String category, UserEntity oneRandom) {
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.user = oneRandom;
+    }
 
-    
-// }
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+}

@@ -1,0 +1,130 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "fox-forum-book",
+    "dateExported": "2023-11-13T21:24:59.338Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "e3c3741c-866e-405b-9054-b8524369dbd1",
+            "colId": "7d405ad6-5dea-484f-9bb2-63069ec9616a",
+            "containerId": "",
+            "name": "GetBook",
+            "url": "http://localhost:8083/book/4",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-10-14T15:41:23.806Z",
+            "modified": "2023-11-13T21:01:17.906Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "8c8b8d56-129d-4a1d-9535-df4bb1d631f3",
+            "colId": "7d405ad6-5dea-484f-9bb2-63069ec9616a",
+            "containerId": "",
+            "name": "GetAllBook",
+            "url": "http://localhost:8083/book?page=3&size=10",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2023-10-14T15:41:23.807Z",
+            "modified": "2023-11-13T21:06:31.028Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "3",
+                    "isPath": false
+                },
+                {
+                    "name": "size",
+                    "value": "10",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "59aa803b-ac41-42bb-98e2-97f6448b6280",
+            "colId": "7d405ad6-5dea-484f-9bb2-63069ec9616a",
+            "containerId": "",
+            "name": "InsertBook",
+            "url": "http://localhost:8083/book",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-10-14T15:41:23.808Z",
+            "modified": "2023-11-13T21:12:44.483Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"Medio Rey\",\n  \"author\": \"Antonio Banderas\",\n  \"category\": \"Horror\",\n  \"user\": {\n    \"id\": 2\n  }\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJjYWE3OTIxOC1hNTNjLTRhYmEtOTIyZC02N2M3MmQzMGI4ZjgiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE2OTk5MDk5NTEsImV4cCI6MTY5OTkxMTQ1MSwibmFtZSI6InVjYXJ0ZXIifQ.EMIOvOsqW6mIMnlB8u7GLUjDRkXTRSPPi06nM4e20PvT65b1yYkCOmeS4NG0oObxGLPhAsuPRoXwqL-KFUc3dw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "c6388554-b7f3-46e6-9d15-7f67ea45b2cb",
+            "colId": "7d405ad6-5dea-484f-9bb2-63069ec9616a",
+            "containerId": "",
+            "name": "PopulateBook",
+            "url": "http://localhost:8083/book/populate/5",
+            "method": "POST",
+            "sortNum": 25000,
+            "created": "2023-10-14T15:41:23.809Z",
+            "modified": "2023-11-13T21:13:44.198Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJjYWE3OTIxOC1hNTNjLTRhYmEtOTIyZC02N2M3MmQzMGI4ZjgiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE2OTk5MDk5NTEsImV4cCI6MTY5OTkxMTQ1MSwibmFtZSI6InVjYXJ0ZXIifQ.EMIOvOsqW6mIMnlB8u7GLUjDRkXTRSPPi06nM4e20PvT65b1yYkCOmeS4NG0oObxGLPhAsuPRoXwqL-KFUc3dw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "9e97b891-8015-4a33-8d4b-7f10ac5d548a",
+            "colId": "7d405ad6-5dea-484f-9bb2-63069ec9616a",
+            "containerId": "",
+            "name": "UpdateBook",
+            "url": "http://localhost:8083/book",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2023-10-14T15:41:23.810Z",
+            "modified": "2023-11-13T21:21:45.053Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 46,\n  \"title\": \"Eos quia rem placeat est.\",\n  \"author\": \"William Gorczany DDS\",\n  \"category\": \"adsa\",\n  \"user\": {\n    \"id\": 23\n  }\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJjYWE3OTIxOC1hNTNjLTRhYmEtOTIyZC02N2M3MmQzMGI4ZjgiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE2OTk5MDk5NTEsImV4cCI6MTY5OTkxMTQ1MSwibmFtZSI6InVjYXJ0ZXIifQ.EMIOvOsqW6mIMnlB8u7GLUjDRkXTRSPPi06nM4e20PvT65b1yYkCOmeS4NG0oObxGLPhAsuPRoXwqL-KFUc3dw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "fe925877-f7e2-4133-bd58-acbc77878279",
+            "colId": "7d405ad6-5dea-484f-9bb2-63069ec9616a",
+            "containerId": "",
+            "name": "DeleteBook",
+            "url": "http://localhost:8083/book/46",
+            "method": "DELETE",
+            "sortNum": 37500,
+            "created": "2023-10-14T15:41:23.811Z",
+            "modified": "2023-11-13T21:23:23.002Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJiN2Q4ZDQyNS03YTBiLTRkNjQtODFhMC1kODEzMTYyNjk0MjMiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE2OTk5MTA1OTMsImV4cCI6MTY5OTkxMjA5MywibmFtZSI6InVjYXJ0ZXIifQ.GS9aXE4oc8wtuNl9JtSJMSNE7gb58W8KFSsYLgXGCirgJGsYKJ2XUTX0arLGKaJtN5eiyBIACZJPplGyDD4eDA"
+            },
+            "tests": []
+        }
+    ]
+}

@@ -1,78 +1,82 @@
-// package es.ausiasmarch.liberlibrum.entity;
+package es.ausiasmarch.liberlibrum.entity;
 
-// import java.time.LocalDate;
+import java.time.LocalDate;
 
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.GeneratedValue;
-// import jakarta.persistence.GenerationType;
-// import jakarta.persistence.Id;
-// import jakarta.persistence.Table;
-// import jakarta.validation.constraints.NotBlank;
-// import jakarta.validation.constraints.NotNull;
-// import jakarta.validation.constraints.Size;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-// @Entity
-// @Table(name = "loans")
-// public class LoanEntity {
+@Entity
+@Table(name = "loans")
+public class LoanEntity {
     
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//     private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-//     @NotBlank
-//     @NotNull
-//     private UserEntity user;
-
-//     @NotBlank
-//     @NotNull
-//     private BookEntity book;
-
-//     @NotBlank
-//     @NotNull
-//     @Size(min = 1, max = 100)
-//     private LocalDate loanDate;
+    @NotBlank
+    @NotNull
+    @Size(min = 1, max = 100)
+    private LocalDate loanDate;
     
-//     @NotBlank
-//     @NotNull
-//     @Size(min = 1, max = 100)
-//     private LocalDate dueDate;
+    @NotBlank
+    @NotNull
+    @Size(min = 1, max = 100)
+    private LocalDate dueDate;
 
-//     public Long getId() {
-//         return id;
-//     }
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private UserEntity user;
 
-//     public UserEntity getUser() {
-//         return user;
-//     }
+    @ManyToOne
+    @JoinColumn(name = "id_book")
+    private BookEntity book;
 
-//     public void setUser(UserEntity user) {
-//         this.user = user;
-//     }
+    public Long getId() {
+        return id;
+    }
 
-//     public BookEntity getBook() {
-//         return book;
-//     }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-//     public void setBook(BookEntity book) {
-//         this.book = book;
-//     }
+    public LocalDate getLoanDate() {
+        return loanDate;
+    }
 
-//     public LocalDate getLoanDate() {
-//         return loanDate;
-//     }
+    public void setLoanDate(LocalDate loanDate) {
+        this.loanDate = loanDate;
+    }
 
-//     public void setLoanDate(LocalDate loanDate) {
-//         this.loanDate = loanDate;
-//     }
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
 
-//     public LocalDate getDueDate() {
-//         return dueDate;
-//     }
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
 
-//     public void setDueDate(LocalDate dueDate) {
-//         this.dueDate = dueDate;
-//     }
+    public UserEntity getUser() {
+        return user;
+    }
 
-    
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 
-// }
+    public BookEntity getBook() {
+        return book;
+    }
+
+    public void setBook(BookEntity book) {
+        this.book = book;
+    }
+
+}
