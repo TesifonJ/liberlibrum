@@ -31,15 +31,23 @@ public class BookService {
         return oBookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book not found"));
     }
 
-    public Page<BookEntity> getPage(Pageable oPageable, Long userId, Long BookId) {
+    public Page<BookEntity> getPage(Pageable oPageable, Long userId, Long bookId) {
         if (userId == 0) {
-            if (BookId == 0) {
+            if (bookId == 0) {
                 return oBookRepository.findAll(oPageable);
             } else {
                 return oBookRepository.findByUserId(userId, oPageable);
             }
         } else {
             return oBookRepository.findByUserId(userId, oPageable);
+        }
+    }
+
+    public Page<BookEntity> getPageByLoansNumberDesc(Pageable oPageable, Long loanId) {
+        if (loanId == 0) {
+            return oBookRepository.findLoansByBooksNumberDesc(oPageable);
+        } else {
+            return oBookRepository.findLoansByBooksNumberDescFilterByUserId(loanId, oPageable);
         }
     }
 

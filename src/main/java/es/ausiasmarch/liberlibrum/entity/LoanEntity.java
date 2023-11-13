@@ -24,12 +24,12 @@ public class LoanEntity {
     @NotBlank
     @NotNull
     @Size(min = 1, max = 100)
-    private LocalDate loanDate;
+    private LocalDate loanDate = LocalDate.now();
     
     @NotBlank
     @NotNull
     @Size(min = 1, max = 100)
-    private LocalDate dueDate;
+    private LocalDate dueDate = loanDate.plusDays(15);
 
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -38,6 +38,14 @@ public class LoanEntity {
     @ManyToOne
     @JoinColumn(name = "id_book")
     private BookEntity book;
+
+    public LoanEntity() {
+    }
+
+    public LoanEntity(UserEntity user, BookEntity book) {
+        this.user = user;
+        this.book = book;
+    }
 
     public Long getId() {
         return id;

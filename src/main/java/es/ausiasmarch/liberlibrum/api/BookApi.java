@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import es.ausiasmarch.liberlibrum.entity.BookEntity;
 import es.ausiasmarch.liberlibrum.service.BookService;
 
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/book")
@@ -60,5 +61,11 @@ public class BookApi {
     @DeleteMapping("/empty")
     public ResponseEntity<Long> empty() {
         return ResponseEntity.ok(oBookService.empty());
+    }
+
+    @GetMapping("/byLoansNumberDesc")
+    public ResponseEntity<Page<BookEntity>> getPageByRepliesNumberDesc(Pageable oPageable,
+            @RequestParam(value = "loan", defaultValue = "0", required = false) Long loanId) {
+        return ResponseEntity.ok(oBookService.getPageByLoansNumberDesc(oPageable, loanId));
     }
 }

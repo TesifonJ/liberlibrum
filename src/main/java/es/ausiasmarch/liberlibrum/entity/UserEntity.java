@@ -75,11 +75,11 @@ public class UserEntity {
      */
     private Boolean role;
 
-    // @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
-    // private List<BookEntity> books;
+    @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<BookEntity> books;
 
-    // @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
-    // private List<LoanEntity> loans;
+    @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<LoanEntity> loans;
 
     /**
      * Constructor for a User
@@ -167,11 +167,11 @@ public class UserEntity {
         this.role = role;
     }
     
-    // public int getNumberOfBooks(){
-    //     return this.books.size();
-    // }
+    public int getNumberOfBooks(){
+        return this.books.size();
+    }
 
-    // public int getNumberOfLoans(){
-    //     return this.loans.size();
-    // }
+    public int getNumberOfLoans(){
+        return this.loans.size();
+    }
 }

@@ -40,8 +40,8 @@ public class BookEntity {
     @JoinColumn(name = "id_user")
     private UserEntity user;
 
-    // @OneToMany(mappedBy = "book", fetch = jakarta.persistence.FetchType.LAZY)
-    // private List<LoanEntity> books;
+    @OneToMany(mappedBy = "book", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<LoanEntity> loan;
 
     public BookEntity() {
 

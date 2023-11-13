@@ -1,6 +1,5 @@
 package es.ausiasmarch.liberlibrum.service;
 
-import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,8 +31,6 @@ public class LoanService {
     @Autowired
     BookService oBookService;  
 
-    @Autowired
-    LoanService oLoanService;
 
     @Autowired
     SessionService oSessionService;
@@ -88,7 +85,7 @@ public class LoanService {
     }
 
     public Long delete(Long id) {
-       // LoanEntity oLoanEntityFromDatabase = this.get(id);
+        //LoanEntity oLoanEntityFromDatabase = this.get(id);
         oSessionService.onlyAdmins();
         oLoanRepository.deleteById(id);
         return id;
@@ -97,7 +94,7 @@ public class LoanService {
     public Long populate(Integer amount) {
         oSessionService.onlyAdmins();
         for (int i = 0; i < amount; i++) {
-           // oLoanRepository.save(new LoanEntity(DataGenerationHelper.getSpeech(1),DataGenerationHelper.getSpeech(ThreadLocalRandom.current().nextInt(5, 25)),oUserService.getOneRandom(), oBookService.getOneRandom()));
+           oLoanRepository.save(new LoanEntity(oUserService.getOneRandom(), oBookService.getOneRandom()));
         }
         return oLoanRepository.count();
     }
