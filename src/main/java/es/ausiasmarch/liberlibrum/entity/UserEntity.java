@@ -12,6 +12,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -41,8 +42,6 @@ public class UserEntity {
     /**
      * The surname of the user
      */
-    @NotNull
-    @NotBlank
     @Size(min = 3, max = 100)
     private String surname;
 
@@ -66,8 +65,7 @@ public class UserEntity {
      * The hash of the password introduced by the user
      */
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @NotNull
-    @NotBlank
+    @NotEmpty
     @Size(min = 64, max = 64)
     @Pattern(regexp = "^[a-fA-F0-9]+$", message = "Password must be hexadecimal")
     private String password;
@@ -117,8 +115,16 @@ public class UserEntity {
         return id;
     }
 
-    public Long setId(Long id) {
-        return this.id = id;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSurname() {
@@ -145,12 +151,12 @@ public class UserEntity {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getPassword() {
+        return password;
     }
 
-    public String getPassword(){
-        return this.password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Boolean getRole() {

@@ -15,8 +15,8 @@ import es.ausiasmarch.liberlibrum.repository.UserRepository;
 
 @Service
 public class UserService {
-    
-    private final String foxforumPASSWORD = "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e";
+
+    private static final String LIBERLIBRUM_DEFAULT_PASSWORD = "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e";
 
     @Autowired
     UserRepository oUserRepository;
@@ -36,9 +36,9 @@ public class UserService {
         return oUserRepository.findAll(oPageable);
     }
 
-    // public Page<UserEntity> getPageByRepliesNumberDesc(Pageable oPageable) {
-    //     return oUserRepository.findUsersByRepliesNumberDescFilter(oPageable);
-    // }
+    public Page<UserEntity> getPageByRepliesNumberDesc(Pageable oPageable) {
+        return oUserRepository.findUsersByLoansNumberDescFilter(oPageable);
+    }
 
     public Long create(UserEntity oUserEntity) {
         oSessionService.onlyAdmins();
@@ -51,13 +51,11 @@ public class UserService {
         UserEntity oUserEntityFromDatabase = this.get(oUserEntityToSet.getId());
         oSessionService.onlyAdminsOrUsersWithIisOwnData(oUserEntityFromDatabase.getId());
         if (oSessionService.isUser()) {
-            oUserEntityToSet.setId(null);
+            oUserEntityToSet.setPassword(oUserEntityFromDatabase.getPassword());
             oUserEntityToSet.setRole(oUserEntityFromDatabase.getRole());
-            oUserEntityToSet.setPassword(foxforumPASSWORD);
             return oUserRepository.save(oUserEntityToSet);
         } else {
-            oUserEntityToSet.setId(null);
-            oUserEntityToSet.setPassword(foxforumPASSWORD);
+            oUserEntityToSet.setPassword(LIBERLIBRUM_DEFAULT_PASSWORD);
             return oUserRepository.save(oUserEntityToSet);
         }
     }
@@ -79,30 +77,28 @@ public class UserService {
         for (int i = 0; i < amount; i++) {
             String name = DataGenerationHelper.getRadomName();
             String surname = DataGenerationHelper.getRadomSurname();
-            String lastname = DataGenerationHelper.getRadomSurname();
-            String email = name.substring(0, 3) + surname.substring(0, 3) + lastname.substring(0, 2) + i
-                    + "@ausiasmarch.net";
+            String email = name.substring(0, 3) + surname.substring(0, 3) + "@ausiasmarch.net";
             String username = DataGenerationHelper
                     .doNormalizeString(
-                            name.substring(0, 3) + surname.substring(1, 3) + lastname.substring(1, 2) + i);
+                            name.substring(0, 3) + surname.substring(1, 3));
             oUserRepository.save(new UserEntity(name, surname, email, username,
-                    "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e", true));
+                    LIBERLIBRUM_DEFAULT_PASSWORD, true));
         }
         return oUserRepository.count();
     }
 
-    // @Transactional
-    // public Long empty() {
-    //     oSessionService.onlyAdmins();
-    //     oUserRepository.deleteAll();
-    //     oUserRepository.resetAutoIncrement();
-    //     UserEntity oUserEntity1 = new UserEntity(1L, "Pedro", "Picapiedra", "Roca",
-    //             "pedropicapiedra@ausiasmarch.net", "pedropicapiedra", foxforumPASSWORD, false);
-    //     oUserRepository.save(oUserEntity1);
-    //     oUserEntity1 = new UserEntity(2L, "Pablo", "Mármol", "Granito", "pablomarmol@ausiasmarch.net",
-    //             "pablomarmol", foxforumPASSWORD, true);
-    //     oUserRepository.save(oUserEntity1);
-    //     return oUserRepository.count();
-    // }
+    @Transactional
+    public Long empty() {
+        oSessionService.onlyAdmins();
+        oUserRepository.deleteAll();
+        oUserRepository.resetAutoIncrement();
+        UserEntity oUserEntity1 = new UserEntity("Pedro", "pedropicapiedra@ausiasmarch.net", "pedropicapiedra",
+                LIBERLIBRUM_DEFAULT_PASSWORD, false);
+        oUserRepository.save(oUserEntity1);
+        oUserEntity1 = new UserEntity("Pablo", "pablomarmol@ausiasmarch.net", "pablomarmol",
+                LIBERLIBRUM_DEFAULT_PASSWORD, true);
+        oUserRepository.save(oUserEntity1);
+        return oUserRepository.count();
+    }
 
 }
