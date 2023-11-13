@@ -1,10 +1,11 @@
 package es.ausiasmarch.liberlibrum.filter;
 
+import es.ausiasmarch.liberlibrum.helper.JWTHelper;
+
 import java.io.IOException;
 
 import org.springframework.stereotype.Component;
 
-import es.ausiasmarch.liberlibrum.helper.JWTHelper;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class JWTFilter implements Filter{
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -46,4 +48,5 @@ public class JWTFilter implements Filter{
     @Override
     public void destroy() {
     }
+
 }

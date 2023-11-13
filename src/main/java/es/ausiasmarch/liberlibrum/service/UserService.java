@@ -1,7 +1,8 @@
 package es.ausiasmarch.liberlibrum.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import es.ausiasmarch.liberlibrum.entity.UserEntity;
 import es.ausiasmarch.liberlibrum.exception.ResourceNotFoundException;
 import es.ausiasmarch.liberlibrum.helper.DataGenerationHelper;
 import es.ausiasmarch.liberlibrum.repository.UserRepository;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 
@@ -20,10 +22,8 @@ public class UserService {
     @Autowired
     UserRepository oUserRepository;
 
-    @Autowired
     HttpServletRequest oHttpServletRequest;
 
-    @Autowired
     SessionService oSessionService;
 
     public UserEntity get(Long id) {
@@ -81,7 +81,7 @@ public class UserService {
                     .doNormalizeString(
                             name.substring(0, 3) + surname.substring(1, 3) + lastname.substring(1, 2) + i);
             oUserRepository.save(new UserEntity(name, surname, lastname, email, username,
-                    "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e", true));
+                    LIBERLIBRUM_PASSWORD, true));
         }
         return oUserRepository.count();
     }

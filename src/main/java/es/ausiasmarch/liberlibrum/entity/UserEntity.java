@@ -77,11 +77,11 @@ public class UserEntity {
      */
     private Boolean role;
 
-    @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
-    private List<BookEntity> books;
+    // @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
+    // private List<BookEntity> books;
 
-    @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
-    private List<LoanEntity> loans;
+    // @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
+    // private List<LoanEntity> loans;
 
     /**
      * Constructor for a User
@@ -92,6 +92,11 @@ public class UserEntity {
      * @param password the hash of the user's password
      * @param role the role of the user
      */
+
+    public UserEntity() {
+        
+    }
+
     public UserEntity(String name, String surname, String username, String email, String password, Boolean role) {
         this.name = name;
         this.surname = surname;
@@ -106,6 +111,15 @@ public class UserEntity {
     
     public UserEntity(long l, String string, String string2, String string3, String string4, String string5,
             String liberlibrumPASSWORD, boolean b) {
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long setId(Long id) {
+        return this.id = id;
     }
 
     public String getSurname() {
@@ -144,11 +158,11 @@ public class UserEntity {
         this.role = role;
     }
     
-    public int getNumberOfBooks(){
-        return this.books.size();
-    }
+    // public int getNumberOfBooks(){
+    //     return this.books.size();
+    // }
 
-    public int getNumberOfLoans(){
-        return this.loans.size();
-    }
+    // public int getNumberOfLoans(){
+    //     return this.loans.size();
+    // }
 }

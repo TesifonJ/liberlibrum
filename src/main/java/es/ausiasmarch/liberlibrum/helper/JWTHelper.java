@@ -12,6 +12,7 @@ import io.jsonwebtoken.security.Keys;
 
 
 public class JWTHelper {
+   
     private static final String SECRET = "fosforum_ausiasmarch_daw_2023_1234567890@@$$";
     private static final String ISSUER = "PHOSPHORUM DAW AUSIAS MARCH";
 
@@ -58,5 +59,4 @@ public class JWTHelper {
             return null;
         }
     }
-
 }
