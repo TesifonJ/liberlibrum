@@ -2,6 +2,7 @@ package es.ausiasmarch.liberlibrum.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import jakarta.servlet.http.HttpServletRequest;
 
 import es.ausiasmarch.liberlibrum.bean.UserBean;
 import es.ausiasmarch.liberlibrum.entity.UserEntity;
@@ -9,10 +10,10 @@ import es.ausiasmarch.liberlibrum.exception.ResourceNotFoundException;
 import es.ausiasmarch.liberlibrum.exception.UnauthorizedException;
 import es.ausiasmarch.liberlibrum.helper.JWTHelper;
 import es.ausiasmarch.liberlibrum.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class SessionService {
+  
     @Autowired
     UserRepository oUserRepository;
 
@@ -111,5 +112,6 @@ public class SessionService {
             throw new UnauthorizedException("Only admins or users can do this");
         }
     }
+
 
 }

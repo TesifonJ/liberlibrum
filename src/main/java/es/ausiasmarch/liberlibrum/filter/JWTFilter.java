@@ -48,5 +48,4 @@ public class JWTFilter implements Filter{
     @Override
     public void destroy() {
     }
-
 }
