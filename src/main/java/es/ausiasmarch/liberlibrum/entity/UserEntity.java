@@ -1,5 +1,6 @@
 package es.ausiasmarch.liberlibrum.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -91,8 +92,9 @@ public class UserEntity {
      * @param role the role of the user
      */
 
-    public UserEntity() {
-        
+       public UserEntity() {
+        books = new ArrayList<>();
+        loans = new ArrayList<>();
     }
 
     public UserEntity(String name, String surname, String username, String email, String password, Boolean role) {

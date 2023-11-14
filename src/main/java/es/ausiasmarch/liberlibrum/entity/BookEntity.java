@@ -1,5 +1,6 @@
 package es.ausiasmarch.liberlibrum.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -37,14 +38,14 @@ public class BookEntity {
     private String category;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
     @OneToMany(mappedBy = "book", fetch = jakarta.persistence.FetchType.LAZY)
-    private List<LoanEntity> loan;
+    private List<LoanEntity> loans;
 
     public BookEntity() {
-
+        loans = new ArrayList<>();
     }
 
     public BookEntity(Long id, String title, String author, String category, UserEntity user) {
@@ -102,4 +103,7 @@ public class BookEntity {
         this.category = category;
     }
 
+    public int getLoans(){
+        return loans.size();
+    }
 }

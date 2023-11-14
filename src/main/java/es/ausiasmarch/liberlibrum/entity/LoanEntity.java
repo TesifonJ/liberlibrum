@@ -1,6 +1,7 @@
 package es.ausiasmarch.liberlibrum.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,11 +33,11 @@ public class LoanEntity {
     private LocalDate dueDate = loanDate.plusDays(15);
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(name = "id_book")
+    @JoinColumn(name = "book_id")
     private BookEntity book;
 
     public LoanEntity() {
