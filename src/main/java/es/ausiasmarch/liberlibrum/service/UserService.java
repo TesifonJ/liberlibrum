@@ -36,9 +36,9 @@ public class UserService {
         return oUserRepository.findAll(oPageable);
     }
 
-    public Page<UserEntity> getPageByRepliesNumberDesc(Pageable oPageable) {
-        return oUserRepository.findUsersByLoansNumberDescFilter(oPageable);
-    }
+    // public Page<UserEntity> getPageByRepliesNumberDesc(Pageable oPageable) {
+    //     return oUserRepository.findUsersByLoansNumberDescFilter(oPageable);
+    // }
 
     public Long create(UserEntity oUserEntity) {
         oSessionService.onlyAdmins();
@@ -89,7 +89,7 @@ public class UserService {
     public Long empty() {
         oSessionService.onlyAdmins();
         oUserRepository.deleteAll();
-        oUserRepository.resetAutoIncrement();
+        //oUserRepository.resetAutoIncrement();
         UserEntity oUserEntity1 = new UserEntity("Pedro", "pedropicapiedra@ausiasmarch.net", "pedropicapiedra",
                 LIBERLIBRUM_DEFAULT_PASSWORD, false);
         oUserRepository.save(oUserEntity1);

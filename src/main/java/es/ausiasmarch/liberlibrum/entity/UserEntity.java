@@ -20,7 +20,8 @@ import jakarta.validation.constraints.Size;
 
 /**
  * @author TesifonJ
- * Class used to manipulate an ODT, the password, id, books and loans attributes musn`t have setter, ONLY getter
+ *         Class used to manipulate an ODT, the password, id, books and loans
+ *         attributes musn`t have setter, ONLY getter
  */
 @Entity
 @Table(name = "users")
@@ -33,7 +34,7 @@ public class UserEntity {
     private Long id;
 
     /**
-     * The name of the user 
+     * The name of the user
      */
     @NotNull
     @NotBlank
@@ -51,7 +52,7 @@ public class UserEntity {
      */
     @NotNull
     @NotBlank
-    @Size(min=6, max=15)
+    @Size(min = 6, max = 15)
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Username must be alphanumeric")
     private String username;
 
@@ -84,15 +85,16 @@ public class UserEntity {
 
     /**
      * Constructor for a User
-     * @param name the name of the user 
-     * @param surname the surname of the user
+     * 
+     * @param name     the name of the user
+     * @param surname  the surname of the user
      * @param username the username of the user
-     * @param email the email of the user
+     * @param email    the email of the user
      * @param password the hash of the user's password
-     * @param role the role of the user
+     * @param role     the role of the user
      */
 
-       public UserEntity() {
+    public UserEntity() {
         books = new ArrayList<>();
         loans = new ArrayList<>();
     }
@@ -105,6 +107,7 @@ public class UserEntity {
         this.password = password;
         this.role = role;
     }
+
     public UserEntity(String name, String username, String email, String password, Boolean role) {
         this.name = name;
         this.username = username;
@@ -168,12 +171,12 @@ public class UserEntity {
     public void setRole(Boolean role) {
         this.role = role;
     }
-    
-    public int getNumberOfBooks(){
+
+    public int getNumberOfBooks() {
         return this.books.size();
     }
 
-    public int getNumberOfLoans(){
+    public int getNumberOfLoans() {
         return this.loans.size();
     }
 }
