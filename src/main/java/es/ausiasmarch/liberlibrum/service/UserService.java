@@ -36,9 +36,14 @@ public class UserService {
         return oUserRepository.findAll(oPageable);
     }
 
-    // public Page<UserEntity> getPageByRepliesNumberDesc(Pageable oPageable) {
-    //     return oUserRepository.findUsersByLoansNumberDescFilter(oPageable);
-    // }
+    public UserEntity getByUsername(String username) {
+        return oUserRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found by username"));
+    }
+
+    public Page<UserEntity> getPageByLoanNumberDesc(Pageable oPageable) {
+        return oUserRepository.findUsersByLoansNumberDescFilter(oPageable);
+    }
 
     public Long create(UserEntity oUserEntity) {
         oSessionService.onlyAdmins();
@@ -78,9 +83,10 @@ public class UserService {
             String name = DataGenerationHelper.getRadomName();
             String surname = DataGenerationHelper.getRadomSurname();
             String email = name.substring(0, 3) + surname.substring(0, 3) + i + "@ausiasmarch.net";
-            String username =DataGenerationHelper.doNormalizeString(name.substring(0, 3) + surname.substring(1, 3) + i);
-            
-            oUserRepository.save(new UserEntity(name, surname,username, email, LIBERLIBRUM_DEFAULT_PASSWORD, true));
+            String username = DataGenerationHelper
+                    .doNormalizeString(name.substring(0, 3) + surname.substring(1, 3) + i);
+
+            oUserRepository.save(new UserEntity(name, surname, username, email, LIBERLIBRUM_DEFAULT_PASSWORD, true));
         }
         return oUserRepository.count();
     }
@@ -89,7 +95,7 @@ public class UserService {
     public Long empty() {
         oSessionService.onlyAdmins();
         oUserRepository.deleteAll();
-        //oUserRepository.resetAutoIncrement();
+        oUserRepository.resetAutoIncrement();
         UserEntity oUserEntity1 = new UserEntity("Pedro", "pedropicapiedra@ausiasmarch.net", "pedropicapiedra",
                 LIBERLIBRUM_DEFAULT_PASSWORD, false);
         oUserRepository.save(oUserEntity1);
