@@ -56,6 +56,9 @@ public class UserService {
         UserEntity oUserEntityFromDatabase = this.get(oUserEntityToSet.getId());
         oSessionService.onlyAdminsOrUsersWithIisOwnData(oUserEntityFromDatabase.getId());
         if (oSessionService.isUser()) {
+            if(oUserEntityToSet.getPassword() == null){
+                oUserEntityToSet.setPassword(LIBERLIBRUM_DEFAULT_PASSWORD);
+            }
             oUserEntityToSet.setPassword(oUserEntityFromDatabase.getPassword());
             oUserEntityToSet.setRole(oUserEntityFromDatabase.getRole());
             return oUserRepository.save(oUserEntityToSet);
@@ -96,10 +99,10 @@ public class UserService {
         oSessionService.onlyAdmins();
         oUserRepository.deleteAll();
         oUserRepository.resetAutoIncrement();
-        UserEntity oUserEntity1 = new UserEntity("Pedro", "pedropicapiedra@ausiasmarch.net", "pedropicapiedra",
+        UserEntity oUserEntity1 = new UserEntity("Winston",  "Scott", "winscott", "winscott@continental.com",
                 LIBERLIBRUM_DEFAULT_PASSWORD, false);
         oUserRepository.save(oUserEntity1);
-        oUserEntity1 = new UserEntity("Pablo", "pablomarmol@ausiasmarch.net", "pablomarmol",
+        oUserEntity1 = new UserEntity("John",  "Wick", "babayaga", "babayaga@continental.com",
                 LIBERLIBRUM_DEFAULT_PASSWORD, true);
         oUserRepository.save(oUserEntity1);
         return oUserRepository.count();

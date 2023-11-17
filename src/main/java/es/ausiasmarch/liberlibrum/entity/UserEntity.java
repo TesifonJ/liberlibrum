@@ -67,10 +67,11 @@ public class UserEntity {
      * The hash of the password introduced by the user
      */
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @NotEmpty
-    @Size(min = 64, max = 64)
+    @NotNull
+    @NotBlank
+    @Size(min=64, max=64)
     @Pattern(regexp = "^[a-fA-F0-9]+$", message = "Password must be hexadecimal")
-    private String password;
+    private String password = "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e"; 
 
     /**
      * The role of the user, true for Admin and False for normal user
