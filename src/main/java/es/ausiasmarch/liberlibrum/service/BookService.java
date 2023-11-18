@@ -1,5 +1,7 @@
 package es.ausiasmarch.liberlibrum.service;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -87,7 +89,9 @@ public class BookService {
             String author = DataGenerationHelper.getRandomAuthor();
             String category = DataGenerationHelper.getRandomCategory();
 
-            oBookRepository.save(new BookEntity(title, author, category, oUserService.getOneRandom()));
+            
+
+            oBookRepository.save(new BookEntity(title, author, category,new Random().nextBoolean(),oUserService.getOneRandom()));
         }
         return oBookRepository.count();
     }

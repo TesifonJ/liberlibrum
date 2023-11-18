@@ -59,11 +59,12 @@ public class BookEntity {
         this.user = user;
     }
 
-     public BookEntity(String title, String author, String category, UserEntity oneRandom) {
+     public BookEntity(String title, String author, String category, Boolean available,UserEntity oneRandom) {
         this.title = title;
         this.author = author;
         this.category = category;
         this.user = oneRandom;
+        this.available = available;
     }
 
     public UserEntity getOwnerUser() {
