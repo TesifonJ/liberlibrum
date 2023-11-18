@@ -37,6 +37,9 @@ public class BookEntity {
     @Size(min = 1, max = 100)
     private String category;
 
+    @NotNull
+    private Boolean available;
+
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private UserEntity user;
@@ -105,5 +108,13 @@ public class BookEntity {
 
     public int getLoans(){
         return numberOfLoans.size();
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

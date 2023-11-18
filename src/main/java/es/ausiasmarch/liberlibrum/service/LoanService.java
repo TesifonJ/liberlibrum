@@ -1,17 +1,13 @@
 package es.ausiasmarch.liberlibrum.service;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.servlet.http.HttpServletRequest;
 
 import es.ausiasmarch.liberlibrum.entity.LoanEntity;
-import es.ausiasmarch.liberlibrum.entity.UserEntity;
 import es.ausiasmarch.liberlibrum.exception.ResourceNotFoundException;
 import es.ausiasmarch.liberlibrum.helper.DataGenerationHelper;
 import es.ausiasmarch.liberlibrum.repository.BookRepository;
@@ -53,6 +49,14 @@ public class LoanService {
             }
         } else {
             return oLoanRepository.findByUserId(userId, oPageable);
+        }
+    }
+
+    public Page<LoanEntity> getPageByBooksNumberDesc(Pageable oPageable, Long userId) {
+        if (userId == 0) {
+            return oLoanRepository.findLoansByBooksNumberDesc(oPageable);
+        } else {
+            return oLoanRepository.findLoansByBooksNumberDescFilterByUserId(userId, oPageable);
         }
     }
 

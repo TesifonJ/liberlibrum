@@ -14,10 +14,10 @@ public interface LoanRepository extends JpaRepository<LoanEntity, Long>{
     Page<LoanEntity> findByBookId(Long id, Pageable pageable);
 
     @Query(value = "SELECT l.*,count(b.id) FROM loans l, books b WHERE l.id = b.id GROUP BY l.id ORDER BY COUNT(b.id) desc", nativeQuery = true)
-    Page<LoanEntity> findBooksByLoanNumberDesc(Pageable pageable);
+    Page<LoanEntity> findLoansByBooksNumberDesc(Pageable pageable);
 
-    @Query(value = "SELECT l.*,count(b.id) FROM loans l, books b WHERE l.id = b.id and l.id_user=$1 GROUP BY l.id ORDER BY COUNT(b.id) desc", nativeQuery = true)
-    Page<LoanEntity> findBooksByLoanNumberDescFilterByUserId(Long userId, Pageable pageable);
+    @Query(value = "SELECT l.*,count(b.id) FROM loans l, books b WHERE l.id = l.id and b.owner_id=$1 GROUP BY l.id ORDER BY COUNT(b.id) desc", nativeQuery = true)
+    Page<LoanEntity> findLoansByBooksNumberDescFilterByUserId(Long userId, Pageable pageable);
 
     @Modifying
     @Query(value = "ALTER TABLE loans AUTO_INCREMENT = 1", nativeQuery = true)
