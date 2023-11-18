@@ -55,7 +55,7 @@ public class BookService {
         oSessionService.onlyAdminsOrUsers();
         oBookEntity.setId(null);        
         if (oSessionService.isUser()) {
-            oBookEntity.setUser(oSessionService.getSessionUser());
+            oBookEntity.setOwnerUser(oSessionService.getSessionUser());
             return oBookRepository.save(oBookEntity).getId();
         } else {
             return oBookRepository.save(oBookEntity).getId();
@@ -64,9 +64,9 @@ public class BookService {
 
     public BookEntity update(BookEntity oBookEntityToSet) {
         BookEntity oBookEntityFromDatabase = this.get(oBookEntityToSet.getId());
-        oSessionService.onlyAdminsOrUsersWithIisOwnData(oBookEntityFromDatabase.getUser().getId());
+        oSessionService.onlyAdminsOrUsersWithIisOwnData(oBookEntityFromDatabase.getOwnerUser().getId());
         if (oSessionService.isUser()) {
-            oBookEntityToSet.setUser(oBookEntityFromDatabase.getUser());
+            oBookEntityToSet.setOwnerUser(oBookEntityFromDatabase.getOwnerUser());
             return oBookRepository.save(oBookEntityToSet);
         } else {
             return oBookRepository.save(oBookEntityToSet);
@@ -75,7 +75,7 @@ public class BookService {
 
     public Long delete(Long id) {
         BookEntity oBookEntityFromDatabase = this.get(id);
-        oSessionService.onlyAdminsOrUsersWithIisOwnData(oBookEntityFromDatabase.getUser().getId());
+        oSessionService.onlyAdminsOrUsersWithIisOwnData(oBookEntityFromDatabase.getOwnerUser().getId());
         oBookRepository.deleteById(id);
         return id;
     }

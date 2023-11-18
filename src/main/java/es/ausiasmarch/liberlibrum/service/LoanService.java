@@ -94,7 +94,7 @@ public class LoanService {
     public Long populate(Integer amount) {
         oSessionService.onlyAdmins();
         for (int i = 0; i < amount; i++) {
-           oLoanRepository.save(new LoanEntity(oUserService.getOneRandom(), oBookService.getOneRandom()));
+           oLoanRepository.save(new LoanEntity(oUserService.getOneRandom(), oBookService.getOneRandom(), DataGenerationHelper.randomDate(), DataGenerationHelper.randomDate()));
         }
         return oLoanRepository.count();
     }

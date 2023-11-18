@@ -38,14 +38,14 @@ public class BookEntity {
     private String category;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "owner_id")
     private UserEntity user;
 
     @OneToMany(mappedBy = "book", fetch = jakarta.persistence.FetchType.LAZY)
-    private List<LoanEntity> loans;
+    private List<LoanEntity> numberOfLoans;
 
     public BookEntity() {
-        loans = new ArrayList<>();
+        numberOfLoans = new ArrayList<>();
     }
 
     public BookEntity(Long id, String title, String author, String category, UserEntity user) {
@@ -63,11 +63,11 @@ public class BookEntity {
         this.user = oneRandom;
     }
 
-    public UserEntity getUser() {
+    public UserEntity getOwnerUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setOwnerUser(UserEntity user) {
         this.user = user;
     }
 
@@ -104,6 +104,6 @@ public class BookEntity {
     }
 
     public int getLoans(){
-        return loans.size();
+        return numberOfLoans.size();
     }
 }

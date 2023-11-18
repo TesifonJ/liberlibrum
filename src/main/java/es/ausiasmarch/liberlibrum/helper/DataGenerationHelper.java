@@ -1,6 +1,8 @@
 package es.ausiasmarch.liberlibrum.helper;
 
+import java.time.LocalDate;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class DataGenerationHelper {
     
@@ -94,4 +96,7 @@ public class DataGenerationHelper {
         return sentences.toString();
     }
 
+    public static LocalDate randomDate() {
+        return LocalDate.ofEpochDay(ThreadLocalRandom.current().nextLong(LocalDate.of(2000, 1, 1).toEpochDay(), LocalDate.now().toEpochDay()));
+    }
 }

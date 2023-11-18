@@ -3,6 +3,8 @@ package es.ausiasmarch.liberlibrum.entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,9 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "loans")
@@ -22,15 +22,14 @@ public class LoanEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @NotNull
-    @Size(min = 1, max = 100)
-    private LocalDate loanDate = LocalDate.now();
     
-    @NotBlank
     @NotNull
-    @Size(min = 1, max = 100)
-    private LocalDate dueDate = loanDate.plusDays(15);
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate creationDate = LocalDate.now();
+
+    @NotNull
+   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dueDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -43,9 +42,11 @@ public class LoanEntity {
     public LoanEntity() {
     }
 
-    public LoanEntity(UserEntity user, BookEntity book) {
+    public LoanEntity(UserEntity user, BookEntity book, LocalDate creationDate, LocalDate dueDate) {
         this.user = user;
         this.book = book;
+        this.creationDate = creationDate;
+        this.dueDate = dueDate;
     }
 
     public Long getId() {
@@ -56,12 +57,12 @@ public class LoanEntity {
         this.id = id;
     }
 
-    public LocalDate getLoanDate() {
-        return loanDate;
+    public LocalDate getCreationDate() {
+        return creationDate;
     }
 
-    public void setLoanDate(LocalDate loanDate) {
-        this.loanDate = loanDate;
+    public void setcreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
 
     public LocalDate getDueDate() {
