@@ -1,5 +1,7 @@
 package es.ausiasmarch.liberlibrum.service;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,16 +40,16 @@ public class LoanService {
     @Autowired
     HttpServletRequest oHttpServletRequest;
 
-    public LoanEntity get(Long id) {
+   public LoanEntity get(Long id) {
         return oLoanRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Loan not found"));
     }
 
-    public Page<LoanEntity> getPage(Pageable oPageable, Long userId, Long bookId) {
+    public Page<LoanEntity> getPage(Pageable oPageable, Long userId, Long BookId) {
         if (userId == 0) {
-            if (bookId == 0) {
+            if (BookId == 0) {
                 return oLoanRepository.findAll(oPageable);
             } else {
-                return oLoanRepository.findByBookId(bookId, oPageable);
+                return oLoanRepository.findByBookId(BookId, oPageable);
             }
         } else {
             return oLoanRepository.findByUserId(userId, oPageable);
@@ -55,38 +57,34 @@ public class LoanService {
     }
 
     public Long create(LoanEntity oLoanEntity) {
+        oSessionService.onlyAdminsOrUsers();
         oLoanEntity.setId(null);
-        String strJWTusername = oHttpServletRequest.getAttribute("username").toString();
-        UserEntity oUserEntityInSession = oUserRepository.findByUsername(strJWTusername)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        if (Boolean.TRUE.equals(oUserEntityInSession.getRole())) {
-            oLoanEntity.setUser(oUserEntityInSession);
+        if (oSessionService.isUser()) {
+            oLoanEntity.setUser(oSessionService.getSessionUser());
             return oLoanRepository.save(oLoanEntity).getId();
         } else {
+            if (oLoanEntity.getUser().getId() == null || oLoanEntity.getUser().getId() == 0) {
+                oLoanEntity.setUser(oSessionService.getSessionUser());
+            }
             return oLoanRepository.save(oLoanEntity).getId();
         }
     }
 
-    public LoanEntity update(LoanEntity oLoanEntity) {
-        oLoanEntity = oLoanRepository.findById(oLoanEntity.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Loan not found"));
-        String strJWTusername = oHttpServletRequest.getAttribute("username").toString();
-        UserEntity oUserEntityInSession = oUserRepository.findByUsername(strJWTusername)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        if (Boolean.TRUE.equals(oUserEntityInSession.getRole())) {
-            if (oLoanEntity.getUser().getId().equals(oUserEntityInSession.getId())) {
-                return oLoanRepository.save(oLoanEntity);
-            } else {
-                throw new ResourceNotFoundException("Unauthorized");
-            }
+    public LoanEntity update(LoanEntity oLoanEntityToSet) {
+        LoanEntity oLoanEntityFromDatabase = this.get(oLoanEntityToSet.getId());
+        oSessionService.onlyAdminsOrUsersWithIisOwnData(oLoanEntityFromDatabase.getUser().getId());
+        oLoanEntityToSet.setCreationDate(oLoanEntityFromDatabase.getCreationDate());
+        if (oSessionService.isUser()) {
+            oLoanEntityToSet.setUser(oSessionService.getSessionUser());
+            return oLoanRepository.save(oLoanEntityToSet);
         } else {
-            return oLoanRepository.save(oLoanEntity);
+            return oLoanRepository.save(oLoanEntityToSet);
         }
     }
 
     public Long delete(Long id) {
-        //LoanEntity oLoanEntityFromDatabase = this.get(id);
-        oSessionService.onlyAdmins();
+        LoanEntity oLoanEntityFromDatabase = this.get(id);
+        oSessionService.onlyAdminsOrUsersWithIisOwnData(oLoanEntityFromDatabase.getUser().getId());
         oLoanRepository.deleteById(id);
         return id;
     }
@@ -94,37 +92,19 @@ public class LoanService {
     public Long populate(Integer amount) {
         oSessionService.onlyAdmins();
         for (int i = 0; i < amount; i++) {
-           oLoanRepository.save(new LoanEntity(oUserService.getOneRandom(), oBookService.getOneRandom(), DataGenerationHelper.randomDate(), DataGenerationHelper.randomDate()));
+            oLoanRepository.save(new LoanEntity(oUserService.getOneRandom(), oBookService.getOneRandom(), DataGenerationHelper.getRandomDate(),DataGenerationHelper.getRandomDate()));
         }
         return oLoanRepository.count();
     }
 
-      public LoanEntity getOneRandom() {
-        oSessionService.onlyAdmins();
-        Pageable oPageable = PageRequest.of((int) (Math.random() * oLoanRepository.count()), 1);
-        return oLoanRepository.findAll(oPageable).getContent().get(0);
-    }
-
-    public Page<LoanEntity> getPageByBooksNumberDesc(Pageable oPageable, Long userId) {
-        if (userId == 0) {
-            return oLoanRepository.findBooksByLoanNumberDesc(oPageable);
-        } else {
-            return oLoanRepository.findBooksByLoanNumberDescFilterByUserId(userId, oPageable);
-        }
-    }
-
     @Transactional
     public Long empty() {
-        String strJWTusername = oHttpServletRequest.getAttribute("username").toString();
-        UserEntity oUserEntityInSession = oUserRepository.findByUsername(strJWTusername)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        if (Boolean.FALSE.equals(oUserEntityInSession.getRole())) {
-            oLoanRepository.deleteAll();
-            oLoanRepository.resetAutoIncrement();
-            oLoanRepository.flush();
-            return oLoanRepository.count();
-        } else {
-            throw new ResourceNotFoundException("Unauthorized");
-        }
+        oSessionService.onlyAdmins();
+        oLoanRepository.deleteAll();
+        oLoanRepository.resetAutoIncrement();
+        oLoanRepository.flush();
+        return oLoanRepository.count();
     }
+
+
 }

@@ -96,7 +96,7 @@ public class DataGenerationHelper {
         return sentences.toString();
     }
 
-    public static LocalDate randomDate() {
+    public static LocalDate getRandomDate() {
         return LocalDate.ofEpochDay(ThreadLocalRandom.current().nextLong(LocalDate.of(2000, 1, 1).toEpochDay(), LocalDate.now().toEpochDay()));
     }
 }

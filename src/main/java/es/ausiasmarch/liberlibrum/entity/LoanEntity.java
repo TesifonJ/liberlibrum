@@ -61,7 +61,7 @@ public class LoanEntity {
         return creationDate;
     }
 
-    public void setcreationDate(LocalDate creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
