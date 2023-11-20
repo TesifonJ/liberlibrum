@@ -1,7 +1,6 @@
 package es.ausiasmarch.liberlibrum.entity;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,19 +16,22 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "loans")
 public class LoanEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate creationDate = LocalDate.now();
 
     @NotNull
-   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
+
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate returnDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -47,6 +49,14 @@ public class LoanEntity {
         this.book = book;
         this.creationDate = creationDate;
         this.dueDate = dueDate;
+    }
+
+     public LoanEntity(UserEntity user, BookEntity book, LocalDate creationDate, LocalDate dueDate, LocalDate returnDate) {
+        this.user = user;
+        this.book = book;
+        this.creationDate = creationDate;
+        this.dueDate = dueDate;
+        this.returnDate = returnDate;
     }
 
     public Long getId() {
@@ -87,6 +97,14 @@ public class LoanEntity {
 
     public void setBook(BookEntity book) {
         this.book = book;
+    }
+
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public LocalDate getReturnDate() {
+        return returnDate;
     }
 
 }

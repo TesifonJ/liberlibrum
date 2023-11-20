@@ -78,6 +78,7 @@ public class LoanService {
         LoanEntity oLoanEntityFromDatabase = this.get(oLoanEntityToSet.getId());
         oSessionService.onlyAdminsOrUsersWithIisOwnData(oLoanEntityFromDatabase.getUser().getId());
         oLoanEntityToSet.setCreationDate(oLoanEntityFromDatabase.getCreationDate());
+        
         if (oSessionService.isUser()) {
             oLoanEntityToSet.setUser(oSessionService.getSessionUser());
             return oLoanRepository.save(oLoanEntityToSet);
