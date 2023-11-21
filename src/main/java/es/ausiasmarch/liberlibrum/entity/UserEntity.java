@@ -70,7 +70,7 @@ public class UserEntity {
     @NotBlank
     @Size(min=64, max=64)
     @Pattern(regexp = "^[a-fA-F0-9]+$", message = "Password must be hexadecimal")
-    private String password = "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e"; 
+    private String password = "70f56778075ef9f234760032ad49d14d0b62049146042ca88227b3396d3e7e1e"; 
 
     /**
      * The role of the user, true for Admin and False for normal user

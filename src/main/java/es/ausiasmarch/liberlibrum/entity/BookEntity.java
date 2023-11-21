@@ -37,7 +37,7 @@ public class BookEntity {
     @Size(min = 1, max = 100)
     private String category;
 
-    @NotNull
+    
     private Boolean available;
 
     @ManyToOne
