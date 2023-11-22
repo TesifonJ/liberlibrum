@@ -16,7 +16,7 @@ import es.ausiasmarch.liberlibrum.repository.UserRepository;
 @Service
 public class UserService {
 
-    private static final String LIBERLIBRUM_DEFAULT_PASSWORD = "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e";
+    private static final String LIBERLIBRUM_DEFAULT_PASSWORD = "70f56778075ef9f234760032ad49d14d0b62049146042ca88227b3396d3e7e1e";
 
     @Autowired
     UserRepository oUserRepository;
